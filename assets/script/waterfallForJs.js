@@ -20,7 +20,7 @@ function createElementPic(src, isClear) {
     oPic.className = 'pic';
 
     var image = new Image()
-    image.src = "../assets/images/" + src
+    image.src = "./assets/images/" + src
     if(isClear) {
         image.onload = function() {
             // oBox.style.height = image.naturalHeight + 22 + 15;
