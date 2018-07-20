@@ -1,6 +1,5 @@
 window.onload = function () {
-    // waterfall('main', 'box');
-    getPicData(true);
+    initWaterfall();
     // 滚动条滚动动态加载图片
     window.onscroll = function () {
         if (checkScrollSlide()) {
@@ -23,7 +22,6 @@ function createElementPic(src, isClear) {
     image.src = "./assets/images/" + src
     if(isClear) {
         image.onload = function() {
-            // oBox.style.height = image.naturalHeight + 22 + 15;
             waterfall("main", "box");
         }
     }
@@ -59,22 +57,7 @@ function getPicData(isClear) {
             { src: "17.jpg" },
             { src: "18.jpg" },
             { src: "19.jpg" },
-            { src: "20.jpg" },
-            { src: "21.jpg" },
-            { src: "22.jpg" },
-            { src: "23.jpg" },
-            { src: "24.jpg" },
-            { src: "25.jpg" },
-            { src: "26.jpg" },
-            { src: "27.jpg" },
-            { src: "28.jpg" },
-            { src: "29.jpg" },
-            { src: "30.jpg" },
-            { src: "31.jpg" },
-            { src: "32.jpg" },
-            { src: "33.jpg" },
-            { src: "34.jpg" },
-            { src: "35.jpg" },
+            { src: "20.jpg" }
         ]
     }
     var data = result.data;
@@ -108,7 +91,7 @@ function waterfall(parent, target) {
         } else {
             // console.log(hArry)
             var minH = Math.min.apply(null, hArry);
-            index = getMinHIndex(hArry, minH);
+            index = getHIndex(hArry, minH);
             oBoxs[i].style.top = minH + "px";
 
             hArry[index] += oBoxs[i].offsetHeight;
@@ -116,6 +99,13 @@ function waterfall(parent, target) {
         // 设置元素左偏移距离
         // oBoxs[i].style.left = oBoxs[index].offsetWidth + "px";
         oBoxs[i].style.left = oBoxW * index + "px";
+    }
+    var maxH = Math.max.apply(null, hArry);
+    var maxIdx = getHIndex(hArry, maxH);
+    maxH +=  oBoxs[maxIdx].offsetTop;
+    if(maxH < window.innerHeight){
+        getPicData(true);
+        console.log("打印几次");
     }
 }
 
@@ -134,7 +124,7 @@ function getByClass(parent, clsName) {
 }
 
 // 获取当前图片的索引
-function getMinHIndex(arry, val) {
+function getHIndex(arry, val) {
     for (var i in arry) {
         if (arry[i] == val) {
             return i;
@@ -151,4 +141,9 @@ function checkScrollSlide() {
     var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
     var height = document.body.clientHeight || document.documentElement.clientHeight;
     return (lastBoxH < scrollTop + height) ? true : false;
+}
+
+// 页面初始化
+function initWaterfall() {
+    getPicData(true);
 }
