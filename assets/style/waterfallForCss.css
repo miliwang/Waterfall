@@ -1,0 +1,24 @@
+#main{
+    /* columns: 列宽，列数; */
+    /* 多栏布局 */
+    -webkit-column-width: 202px;
+    -moz-column-width: 202px;
+    -moz-column-width: 202px;
+    -ms-column-width: 202px;
+}
+.box{
+    padding: 10px 0 0 15px;
+
+}
+.pic{
+    padding:10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow:0 0 5px #ccc;
+    width: 165px;
+}
+.pic img{
+    display: block;
+    width: 165px;
+    height: auto;
+}
